@@ -24,12 +24,11 @@ use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\HttpFoundation\Response;
 use \RuntimeException;
 
+// @codingStandardsIgnoreStart
 if (version_compare(PHP_VERSION, '7.4.0', 'lt')) {
-    class_alias('\EasyRdf_Graph', ' \Islandora\Chullo\Graph');
+    class_alias('\EasyRdf_Graph', ' \EasyRdf\Graph');
 }
-else {
-    class_alias('\EasyRdf\Graph', ' \Islandora\Chullo\Graph');
-}
+// @codingStandardsIgnoreEnd
 
 /**
  * Default implementation of IFedoraApi using Guzzle.
@@ -250,7 +249,7 @@ class FedoraApi implements IFedoraApi
      * @return ResponseInterface
      */
     public function saveGraph(
-        Graph $graph,
+        \EasyRdf\Graph $graph,
         $uri = '',
         $headers = []
     ) {
@@ -278,7 +277,7 @@ class FedoraApi implements IFedoraApi
      * @return ResponseInterface
      */
     public function createGraph(
-        Graph $graph,
+        \EasyRdf\Graph $graph,
         $uri = '',
         $headers = []
     ) {
@@ -308,7 +307,7 @@ class FedoraApi implements IFedoraApi
     {
         // Extract rdf as response body and return Easy_RDF Graph object.
         $rdf = $response->getBody()->getContents();
-        $graph = new Graph();
+        $graph = new \EasyRdf\Graph();
         if (!empty($rdf)) {
             $graph->parse($rdf, 'jsonld');
         }
