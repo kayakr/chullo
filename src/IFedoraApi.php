@@ -19,6 +19,12 @@ namespace Islandora\Chullo;
 
 use Psr\Http\Message\ResponseInterface;
 
+// phpcs:disable
+if (class_exists('\EasyRdf_Graph')) {
+    class_alias('\EasyRdf_Graph', ' \EasyRdf\Graph');
+}
+// phpcs:enable
+
 /**
  * Interface for Fedora interaction.  All functions return a PSR-7 response.
  */

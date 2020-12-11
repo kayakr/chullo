@@ -24,6 +24,13 @@ use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\HttpFoundation\Response;
 use \RuntimeException;
 
+// phpcs:disable
+if (class_exists('\EasyRdf_Graph')) {
+    class_alias('\EasyRdf_Graph', ' \EasyRdf\Graph');
+}
+// phpcs:enable
+
+//
 /**
  * Default implementation of IFedoraApi using Guzzle.
  */
