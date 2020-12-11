@@ -25,7 +25,10 @@ use Symfony\Component\HttpFoundation\Response;
 use \RuntimeException;
 
 if (version_compare(PHP_VERSION, '7.4.0', 'lt')) {
-    class_alias('\EasyRdf_Graph', ' \EasyRdf\Graph');
+    class_alias('\EasyRdf_Graph', ' \Islandora\Chullo\Graph');
+}
+else {
+    class_alias('\EasyRdf\Graph', ' \Islandora\Chullo\Graph');
 }
 
 /**
@@ -247,7 +250,7 @@ class FedoraApi implements IFedoraApi
      * @return ResponseInterface
      */
     public function saveGraph(
-        \EasyRdf\Graph $graph,
+        Graph $graph,
         $uri = '',
         $headers = []
     ) {
@@ -275,7 +278,7 @@ class FedoraApi implements IFedoraApi
      * @return ResponseInterface
      */
     public function createGraph(
-        \EasyRdf\Graph $graph,
+        Graph $graph,
         $uri = '',
         $headers = []
     ) {
@@ -305,7 +308,7 @@ class FedoraApi implements IFedoraApi
     {
         // Extract rdf as response body and return Easy_RDF Graph object.
         $rdf = $response->getBody()->getContents();
-        $graph = new \EasyRdf\Graph();
+        $graph = new Graph();
         if (!empty($rdf)) {
             $graph->parse($rdf, 'jsonld');
         }
