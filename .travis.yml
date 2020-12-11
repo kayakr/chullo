@@ -18,6 +18,7 @@ before_install:
 install:
   - git clone https://github.com/Islandora/islandora_ci.git $HOME/islandora_ci
   - composer install
+  - php -r 'require(vendor/autoload.php); use Islandora\Chullo\FedoraApi; $chullo = FedoraApi::create("http://future.islandora.ca:8080/fcrepo/rest"); echo $chullo->getResource("http://future.islandora.ca:8080/fcrepo/rest");' 
 
 script:
   - $SCRIPT_DIR/line_endings.sh $TRAVIS_BUILD_DIR
