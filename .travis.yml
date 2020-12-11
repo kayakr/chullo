@@ -1,6 +1,7 @@
 sudo: true
 language: php
 php:
+  - 7.3
   - 7.4
 
 matrix:
@@ -16,7 +17,7 @@ before_install:
 
 install:
   - git clone https://github.com/Islandora/islandora_ci.git $HOME/islandora_ci
-  - composer install
+  - composer update 
 
 script:
   - $SCRIPT_DIR/line_endings.sh $TRAVIS_BUILD_DIR
